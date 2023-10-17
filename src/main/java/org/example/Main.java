@@ -34,7 +34,38 @@ public class Main {
             } else if (command.equals("목록")) {
                 System.out.println("번호 / 작가 / 명언");
                 for (WiseSaying wiseSaying : wiseSayingList) {
-                    System.out.printf("%d, %s, %s \n",wiseSaying.getId(),wiseSaying.getAuthor(),wiseSaying.getContent());
+                    System.out.printf("%d, %s, %s \n", wiseSaying.getId(), wiseSaying.getAuthor(), wiseSaying.getContent());
+                }
+            } else if (command.equals("삭제")) {
+                System.out.println("삭제할 번호(id)를 입력해주세요");
+                long removeId = sc.nextLong();
+                sc.nextLine();
+
+                for (WiseSaying wiseSaying : wiseSayingList) {
+                    if (wiseSaying.getId() == removeId) {
+                        wiseSayingList.remove(wiseSaying);
+                    }
+                }
+                System.out.println(removeId + "번 명언이 삭제되었습니다.");
+            } else if (command.equals("수정")) {
+                System.out.println("수정할 번호(id)를 입력해주세요");
+                long modifyId = sc.nextLong();
+                sc.nextLine();
+
+                for (WiseSaying wiseSaying : wiseSayingList) {
+                    if (wiseSaying.getId() == modifyId) {
+                        System.out.printf("기존 명언: %s\n", wiseSaying.getContent());
+                        System.out.printf("명언: ");
+                        String content = sc.nextLine();
+
+                        System.out.printf("기존 작가: %s\n", wiseSaying.getAuthor());
+                        System.out.printf("작가: ");
+                        String author = sc.nextLine();
+
+                        wiseSaying.setAuthor(author);
+                        wiseSaying.setContent(content);
+                        System.out.println(modifyId + "번 명언이 수정되었습니다.");
+                    }
                 }
             }
         }
@@ -66,6 +97,14 @@ class WiseSaying {
 
     public String getContent() {
         return this.content;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 }
 
